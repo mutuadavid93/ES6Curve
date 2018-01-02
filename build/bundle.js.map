@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/another.js","../src/main.js"],"names":[],"mappings":";;AACA,IAAI,WAAW,IAAf;AACA,QAAQ,GAAR,SAAkB,QAAlB;;;ACDA,IAAI,WAAW,IAAf;AACA,QAAQ,GAAR,SAAkB,QAAlB","file":"bundle.js","sourcesContent":["\nlet greeting = \"Hi\";\nconsole.log(`-- ${greeting} David Munyao`);\n\n\n","\nlet greeting = \"Hi\";\nconsole.log(`-- ${greeting} Street Money`);\n\n"]}
