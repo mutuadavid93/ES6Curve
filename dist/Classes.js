@@ -14,8 +14,11 @@ function display(func) {
 // function keyword.
 
 var Employee = function () {
-    function Employee() {
+    // Create a constructor.
+    function Employee(name) {
         _classCallCheck(this, Employee);
+
+        this._name = name;
     }
 
     _createClass(Employee, [{
@@ -26,7 +29,7 @@ var Employee = function () {
     }, {
         key: "getName",
         value: function getName() {
-            return "Street Money";
+            return this._name;
         }
     }]);
 
@@ -36,7 +39,7 @@ var Employee = function () {
 // instantiate the class
 
 
-var e = new Employee();
+var e = new Employee("Street Money");
 
-console.log(display(e.doWork())); // Work complete
+// console.log(display(e.doWork())); // Work complete
 console.log(display(e.getName())); // Street Money
