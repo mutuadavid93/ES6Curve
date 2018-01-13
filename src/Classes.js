@@ -9,7 +9,7 @@ function display (func) {
 // Class declaration
 // NB: Methods inside a class have no 
 // function keyword.
-class Employee {
+class Employees {
     // Create a constructor.
     constructor(name) {
         this._name = name;
@@ -25,7 +25,7 @@ class Employee {
 }
 
 // instantiate the class
-var e = new Employee("Street Money");
+var e = new Employees("Street Money");
 
 // console.log(display(e.doWork())); // Work complete
 // console.log(display(e.getName())); // Street Money
@@ -101,4 +101,37 @@ let p1 = new Person("Street");
 // Instantiating Manager now Inherits Everything from 
 // Person Super class.
 let m1 = new Manager("Martini");
-console.log(display(m1.doWork()));
+// console.log(display(m1.doWork()));
+
+
+
+
+
+
+
+
+
+
+// Super Keyword usage.
+
+// NB: When you invoke super(PropName) inside a Method it invokes the Method with
+// the same name e.g. constructor in the Super class passing in that Property.
+
+// NB: Whenever you add a contructor() explicitly into a 
+// derived class, the Super class's constructor it's not 
+// called. You must use Super().
+
+// Using the Person Example Above
+class Employee extends Person {
+    constructor(title, name) {
+        super(name);
+        this._title = title;
+    }
+    
+    get title() {
+        return this._title;
+    }
+}
+
+var emp = new Employee("Developer", "StreetMoney");
+console.log(display(`${emp.name} is a ${emp.title}`));

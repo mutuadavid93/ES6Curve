@@ -17,15 +17,15 @@ function display(func) {
 // NB: Methods inside a class have no 
 // function keyword.
 
-var Employee = function () {
+var Employees = function () {
     // Create a constructor.
-    function Employee(name) {
-        _classCallCheck(this, Employee);
+    function Employees(name) {
+        _classCallCheck(this, Employees);
 
         this._name = name;
     }
 
-    _createClass(Employee, [{
+    _createClass(Employees, [{
         key: "doWork",
         value: function doWork() {
             return "Work complete";
@@ -37,13 +37,13 @@ var Employee = function () {
         }
     }]);
 
-    return Employee;
+    return Employees;
 }();
 
 // instantiate the class
 
 
-var e = new Employee("Street Money");
+var e = new Employees("Street Money");
 
 // console.log(display(e.doWork())); // Work complete
 // console.log(display(e.getName())); // Street Money
@@ -135,4 +135,41 @@ var p1 = new Person("Street");
 // Instantiating Manager now Inherits Everything from 
 // Person Super class.
 var m1 = new Manager("Martini");
-console.log(display(m1.doWork()));
+// console.log(display(m1.doWork()));
+
+
+// Super Keyword usage.
+
+// NB: When you invoke super(PropName) inside a Method it invokes the Method with
+// the same name e.g. constructor in the Super class passing in that Property.
+
+// NB: Whenever you add a contructor() explicitly into a 
+// derived class, the Super class's constructor it's not 
+// called. You must use Super().
+
+// Using the Person Example Above
+
+var Employee = function (_Person2) {
+    _inherits(Employee, _Person2);
+
+    function Employee(title, name) {
+        _classCallCheck(this, Employee);
+
+        var _this2 = _possibleConstructorReturn(this, (Employee.__proto__ || Object.getPrototypeOf(Employee)).call(this, name));
+
+        _this2._title = title;
+        return _this2;
+    }
+
+    _createClass(Employee, [{
+        key: "title",
+        get: function get() {
+            return this._title;
+        }
+    }]);
+
+    return Employee;
+}(Person);
+
+var emp = new Employee("Developer", "StreetMoney");
+console.log(display(emp.name + " is a " + emp.title));
