@@ -107,10 +107,21 @@ var highEndIterators = function () {
 // Instead of the return Keyword, it uses the yield keyword to 
 // return Multiple Values.
 
+// Each time a Generator Yields a Value, it returns the thread of execution back 
+// to the caller. i.e. for of loop.
+
+// The caller then takes the yielded value and works it. After it's done it 
+// invokes the iterator for the next value, execution returns to the Generator 
+// function just where it left off.
+
+// This  cycle continues untill there no more yield statements, thus it returns 
+// done = true.
+
 var generatorsFunc = function () {
     
     // Declare the Generator function.
     let numbers = function* (start, end) {
+        // for loop to produce multiple values to yield.
         for(let i = start; i <= end; i++){
             console.log(i); // log number we abt to yield.
             yield i;
@@ -119,7 +130,7 @@ var generatorsFunc = function () {
     
     let sum = 0;
     
-    // Generate code to work with an iterator.
+    // Generate the code to work with an iterator.
     for(let n of numbers(1, 5)){
         sum += n;
     }
@@ -144,6 +155,13 @@ class Company {
     
     
     // Declare the Generator
+    
+    // NB: for of loop, requires a Magic iterator function i.e. Generator. 
+    // It invokes it to get to the next item in the Array. 
+    // It returns each item using yield.
+    
+    // This is a Magic iterator function.
+    // that makes Company Object iterable.
     *[Symbol.iterator]() {
         for (let e of this.employees){
             console.log(e);
@@ -163,29 +181,14 @@ let filter = function* (items, predicate) {
     }
 };
 
-// Example to only Retrieve the exact set of items that match filter.
-// i.e. Just to confirm atleast we have ONE item that matches our creteria.
-let take = function* (items, number) {
-    let counter = 0;
-    if(number < 1) return;
-    
-    for(let item of items){
-        console.log("take", item);
-        yield item;
-        counter += 1;
-        if(counter >= number){
-            return; // sets done to true.
-        }
-    }
-};
-
-
 let count = 0;
 let company = new Company();
 company.addEmployees("Tim", "Kim", "Tom");
 
 // Code to generate an iterator
 // NB: company var it's the employees["Tim", "Kim", "Tom"]
+
+// This code in for of, simulates next().
 for(let employee of filter(company, e => e[0] == 'T')){
     count += 1;
 }

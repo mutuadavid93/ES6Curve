@@ -137,6 +137,16 @@ var highEndIterators = function () {
 // Instead of the return Keyword, it uses the yield keyword to 
 // return Multiple Values.
 
+// Each time a Generator Yields a Value, it returns the thread of execution back 
+// to the caller. i.e. for of loop.
+
+// The caller then takes the yielded value and works it. After it's done it 
+// invokes the iterator for the next value, execution returns to the Generator 
+// function just where it left off.
+
+// This  cycle continues untill there no more yield statements, thus it returns 
+// done = true.
+
 var generatorsFunc = function generatorsFunc() {
 
     // Declare the Generator function.
@@ -173,7 +183,7 @@ var generatorsFunc = function generatorsFunc() {
 
     var sum = 0;
 
-    // Generate code to work with an iterator.
+    // Generate the code to work with an iterator.
     var _iteratorNormalCompletion2 = true;
     var _didIteratorError2 = false;
     var _iteratorError2 = undefined;
@@ -224,6 +234,13 @@ var Company = function () {
         }
 
         // Declare the Generator
+
+        // NB: for of loop, requires a Magic iterator function i.e. Generator. 
+        // It invokes it to get to the next item in the Array. 
+        // It returns each item using yield.
+
+        // This is a Magic iterator function.
+        // that makes Company Object iterable.
 
     }, {
         key: Symbol.iterator,
@@ -385,129 +402,37 @@ var filter = /*#__PURE__*/regeneratorRuntime.mark(function filter(items, predica
     }, filter, this, [[3, 16, 20, 28], [21,, 23, 27]]);
 });
 
-// Example to only Retrieve the exact set of items that match filter.
-// i.e. Just to confirm atleast we have ONE item that matches our creteria.
-var take = /*#__PURE__*/regeneratorRuntime.mark(function take(items, number) {
-    var counter, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, item;
-
-    return regeneratorRuntime.wrap(function take$(_context4) {
-        while (1) {
-            switch (_context4.prev = _context4.next) {
-                case 0:
-                    counter = 0;
-
-                    if (!(number < 1)) {
-                        _context4.next = 3;
-                        break;
-                    }
-
-                    return _context4.abrupt("return");
-
-                case 3:
-                    _iteratorNormalCompletion5 = true;
-                    _didIteratorError5 = false;
-                    _iteratorError5 = undefined;
-                    _context4.prev = 6;
-                    _iterator5 = items[Symbol.iterator]();
-
-                case 8:
-                    if (_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done) {
-                        _context4.next = 19;
-                        break;
-                    }
-
-                    item = _step5.value;
-
-                    console.log("take", item);
-                    _context4.next = 13;
-                    return item;
-
-                case 13:
-                    counter += 1;
-
-                    if (!(counter >= number)) {
-                        _context4.next = 16;
-                        break;
-                    }
-
-                    return _context4.abrupt("return");
-
-                case 16:
-                    _iteratorNormalCompletion5 = true;
-                    _context4.next = 8;
-                    break;
-
-                case 19:
-                    _context4.next = 25;
-                    break;
-
-                case 21:
-                    _context4.prev = 21;
-                    _context4.t0 = _context4["catch"](6);
-                    _didIteratorError5 = true;
-                    _iteratorError5 = _context4.t0;
-
-                case 25:
-                    _context4.prev = 25;
-                    _context4.prev = 26;
-
-                    if (!_iteratorNormalCompletion5 && _iterator5["return"]) {
-                        _iterator5["return"]();
-                    }
-
-                case 28:
-                    _context4.prev = 28;
-
-                    if (!_didIteratorError5) {
-                        _context4.next = 31;
-                        break;
-                    }
-
-                    throw _iteratorError5;
-
-                case 31:
-                    return _context4.finish(28);
-
-                case 32:
-                    return _context4.finish(25);
-
-                case 33:
-                case "end":
-                    return _context4.stop();
-            }
-        }
-    }, take, this, [[6, 21, 25, 33], [26,, 28, 32]]);
-});
-
 var count = 0;
 var company = new Company();
 company.addEmployees("Tim", "Kim", "Tom");
 
 // Code to generate an iterator
 // NB: company var it's the employees["Tim", "Kim", "Tom"]
-var _iteratorNormalCompletion6 = true;
-var _didIteratorError6 = false;
-var _iteratorError6 = undefined;
+
+// This code in for of, simulates next().
+var _iteratorNormalCompletion5 = true;
+var _didIteratorError5 = false;
+var _iteratorError5 = undefined;
 
 try {
-    for (var _iterator6 = filter(company, function (e) {
+    for (var _iterator5 = filter(company, function (e) {
         return e[0] == 'T';
-    })[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-        var employee = _step6.value;
+    })[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+        var employee = _step5.value;
 
         count += 1;
     }
 } catch (err) {
-    _didIteratorError6 = true;
-    _iteratorError6 = err;
+    _didIteratorError5 = true;
+    _iteratorError5 = err;
 } finally {
     try {
-        if (!_iteratorNormalCompletion6 && _iterator6["return"]) {
-            _iterator6["return"]();
+        if (!_iteratorNormalCompletion5 && _iterator5["return"]) {
+            _iterator5["return"]();
         }
     } finally {
-        if (_didIteratorError6) {
-            throw _iteratorError6;
+        if (_didIteratorError5) {
+            throw _iteratorError5;
         }
     }
 }
