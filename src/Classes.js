@@ -85,6 +85,12 @@ class Person {
     get name() {
         return this._name;
     }
+    
+    // Invoke this Method in a Derived class using super Keyword.
+    // i.e. Employee derived class.
+    doWork() {
+        return "free";
+    }
 }
 
 
@@ -119,7 +125,7 @@ let m1 = new Manager("Martini");
 
 // NB: Whenever you add a contructor() explicitly into a 
 // derived class, the Super class's constructor it's not 
-// called. You must use Super().
+// called implicitly. You must use Super().
 
 // Using the Person Example Above
 class Employee extends Person {
@@ -131,7 +137,16 @@ class Employee extends Person {
     get title() {
         return this._title;
     }
+    
+    // Override doWork()
+    doWork() {
+        // invoke any Method Existing in Super Class.
+        // @Syntax; super.MethodName();
+        return super.doWork(); // free
+    }
 }
 
 var emp = new Employee("Developer", "StreetMoney");
-console.log(display(`${emp.name} is a ${emp.title}`));
+// console.log(display(`${emp.name} is a ${emp.title}`));
+
+console.log(emp.doWork());
