@@ -58,9 +58,47 @@ class Animal {
 var anim = new Animal("Dog");
 
 // get the name.
-console.log(anim.name); // DOG.
+// console.log(anim.name); // DOG.
 
 
 // set a new name value on the name property.
 anim.name = "Buffy";
-console.log(anim.name); // BUFFY.
+// console.log(anim.name); // BUFFY.
+
+
+
+
+
+
+
+
+
+
+
+// Inheritance: Reuse code i.e. X "is-a" Z
+// Uses Extends. "is-a" === "extends"
+class Person {
+    constructor(name){
+        this._name = name;
+    }
+    
+    get name() {
+        return this._name;
+    }
+}
+
+
+class Manager extends Person {
+    doWork() {
+        // this._name property is inherited from Person.
+        return `${this._name} is working`;
+    }
+};
+
+let p1 = new Person("Street");
+// console.log(display(p1.name));
+
+// Instantiating Manager now Inherits Everything from 
+// Person Super class.
+let m1 = new Manager("Martini");
+console.log(display(m1.doWork()));
