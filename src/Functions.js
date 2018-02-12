@@ -123,7 +123,7 @@ var generatorsFunc = function () {
     let numbers = function* (start, end) {
         // for loop to produce multiple values to yield.
         for(let i = start; i <= end; i++){
-            console.log(i); // log number we abt to yield.
+            // console.log(i); // log number we abt to yield.
             yield i;
         }
     };
@@ -164,7 +164,7 @@ class Company {
     // that makes Company Object iterable.
     *[Symbol.iterator]() {
         for (let e of this.employees){
-            console.log(e);
+            // console.log(e);
             yield e;
         }
     }
@@ -174,7 +174,7 @@ class Company {
 // Walks through the entire collection.
 let filter = function* (items, predicate) {
     for(let item of items){
-        console.log("filter", item);
+        // console.log("filter", item);
         if(predicate(item)){
             yield item; // return item e.g. Tom
         }
@@ -193,4 +193,4 @@ for(let employee of filter(company, e => e[0] == 'T')){
     count += 1;
 }
 
-display(count);
+// display(count);

@@ -12,7 +12,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // show result.
 function display(func) {
-    return func;
+    return console.log(func);
 }
 
 // Class declaration
@@ -193,6 +193,17 @@ var Employee = function (_Person2) {
 }(Person);
 
 var emp = new Employee("Developer", "StreetMoney");
-// console.log(display(`${emp.name} is a ${emp.title}`));
+display(emp.name + " is a " + emp.title);
 
 console.log(emp.doWork());
+
+/*
+ * 
+ *  NOTES:
+ * 
+ */
+
+// By Default when a Class is Defined and does not Extend anything( i.e. Parent class ),
+// it extends Object.
+//
+// Thus you can Override toStrig() method.

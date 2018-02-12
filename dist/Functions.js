@@ -160,20 +160,19 @@ var generatorsFunc = function generatorsFunc() {
 
                     case 1:
                         if (!(i <= end)) {
-                            _context.next = 8;
+                            _context.next = 7;
                             break;
                         }
 
-                        console.log(i); // log number we abt to yield.
-                        _context.next = 5;
+                        _context.next = 4;
                         return i;
 
-                    case 5:
+                    case 4:
                         i++;
                         _context.next = 1;
                         break;
 
-                    case 8:
+                    case 7:
                     case "end":
                         return _context.stop();
                 }
@@ -259,61 +258,59 @@ var Company = function () {
 
                         case 5:
                             if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
-                                _context2.next = 13;
+                                _context2.next = 12;
                                 break;
                             }
 
                             e = _step3.value;
-
-                            console.log(e);
-                            _context2.next = 10;
+                            _context2.next = 9;
                             return e;
 
-                        case 10:
+                        case 9:
                             _iteratorNormalCompletion3 = true;
                             _context2.next = 5;
                             break;
 
-                        case 13:
-                            _context2.next = 19;
+                        case 12:
+                            _context2.next = 18;
                             break;
 
-                        case 15:
-                            _context2.prev = 15;
+                        case 14:
+                            _context2.prev = 14;
                             _context2.t0 = _context2["catch"](3);
                             _didIteratorError3 = true;
                             _iteratorError3 = _context2.t0;
 
-                        case 19:
+                        case 18:
+                            _context2.prev = 18;
                             _context2.prev = 19;
-                            _context2.prev = 20;
 
                             if (!_iteratorNormalCompletion3 && _iterator3["return"]) {
                                 _iterator3["return"]();
                             }
 
-                        case 22:
-                            _context2.prev = 22;
+                        case 21:
+                            _context2.prev = 21;
 
                             if (!_didIteratorError3) {
-                                _context2.next = 25;
+                                _context2.next = 24;
                                 break;
                             }
 
                             throw _iteratorError3;
 
+                        case 24:
+                            return _context2.finish(21);
+
                         case 25:
-                            return _context2.finish(22);
+                            return _context2.finish(18);
 
                         case 26:
-                            return _context2.finish(19);
-
-                        case 27:
                         case "end":
                             return _context2.stop();
                     }
                 }
-            }, value, this, [[3, 15, 19, 27], [20,, 22, 26]]);
+            }, value, this, [[3, 14, 18, 26], [19,, 21, 25]]);
         })
     }]);
 
@@ -339,67 +336,65 @@ var filter = /*#__PURE__*/regeneratorRuntime.mark(function filter(items, predica
 
                 case 5:
                     if (_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done) {
-                        _context3.next = 14;
+                        _context3.next = 13;
                         break;
                     }
 
                     item = _step4.value;
 
-                    console.log("filter", item);
-
                     if (!predicate(item)) {
-                        _context3.next = 11;
+                        _context3.next = 10;
                         break;
                     }
 
-                    _context3.next = 11;
+                    _context3.next = 10;
                     return item;
 
-                case 11:
+                case 10:
                     _iteratorNormalCompletion4 = true;
                     _context3.next = 5;
                     break;
 
-                case 14:
-                    _context3.next = 20;
+                case 13:
+                    _context3.next = 19;
                     break;
 
-                case 16:
-                    _context3.prev = 16;
+                case 15:
+                    _context3.prev = 15;
                     _context3.t0 = _context3["catch"](3);
                     _didIteratorError4 = true;
                     _iteratorError4 = _context3.t0;
 
-                case 20:
+                case 19:
+                    _context3.prev = 19;
                     _context3.prev = 20;
-                    _context3.prev = 21;
 
                     if (!_iteratorNormalCompletion4 && _iterator4["return"]) {
                         _iterator4["return"]();
                     }
 
-                case 23:
-                    _context3.prev = 23;
+                case 22:
+                    _context3.prev = 22;
 
                     if (!_didIteratorError4) {
-                        _context3.next = 26;
+                        _context3.next = 25;
                         break;
                     }
 
                     throw _iteratorError4;
 
+                case 25:
+                    return _context3.finish(22);
+
                 case 26:
-                    return _context3.finish(23);
+                    return _context3.finish(19);
 
                 case 27:
-                    return _context3.finish(20);
-
-                case 28:
                 case "end":
                     return _context3.stop();
             }
         }
-    }, filter, this, [[3, 16, 20, 28], [21,, 23, 27]]);
+    }, filter, this, [[3, 15, 19, 27], [20,, 22, 26]]);
 });
 
 var count = 0;
@@ -422,6 +417,8 @@ try {
 
         count += 1;
     }
+
+    // display(count);
 } catch (err) {
     _didIteratorError5 = true;
     _iteratorError5 = err;
@@ -436,5 +433,3 @@ try {
         }
     }
 }
-
-display(count);
