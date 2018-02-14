@@ -126,3 +126,66 @@ var a = [1,2,3];
 var b = [4,5,6];
 
 frooz(...a, ...b); // x = 1 and y = 4
+
+
+
+
+
+/*
+ *  Destructuring
+ */
+
+// Def: Take a Structure e.g. an Array/Object and split it up into 
+// it's individual parts.
+
+// Incase we want to consume an Array. We can consume indivual values from the 
+// Array without using Indexors.
+
+// Used better with API results to navigate the tree.
+
+// @Example
+function destructure() {
+    return [1, 2];
+}
+
+// Now Distructure the Array.
+var [a, b, c] = destructure();
+
+// Set Default Values for the Array Values.
+// if they are absent in the returned structure.
+
+// Be safe by speacializing a fallback e.g. Empty Array.
+var [e, f = 43, g] = destructure() || [];
+
+// Gather the Rest of the values into an Array.
+var [d, ...args] = destructure() || [];
+
+
+/*
+ * Dumping Variables
+ * Dump === Discard or Slice some parts of an Array.
+ */
+
+var a = [1,2,3];
+
+// Gather on the Left and Spread on the Right.
+var [x, y, ...a] = [0, ...a, 4];
+
+// Now a == [2, 3, 4]
+
+
+/*
+ * Destructuring a Nested Array
+ */
+function nestedArray() {
+    return [13, [4, 5,6] ];
+}
+
+// This becomes;
+var [v, [h,,n]] = nestedArray() || [];
+
+
+/*
+ * Object Destructuring
+ */
+

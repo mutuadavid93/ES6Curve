@@ -1,5 +1,11 @@
 "use strict";
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 /*
  *  An Arrow Function
  */
@@ -147,9 +153,9 @@ function dice() {
 
     try {
         for (var _iterator2 = params[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var y = _step2.value;
+            var _y = _step2.value;
 
-            console.log(y);
+            console.log(_y);
         }
     } catch (err) {
         _didIteratorError2 = true;
@@ -180,4 +186,90 @@ function frooz(x, y) {
 var a = [1, 2, 3];
 var b = [4, 5, 6];
 
-frooz.apply(undefined, a.concat(b)); // x = 1 and y = 4
+frooz.apply(undefined, _toConsumableArray(a).concat(_toConsumableArray(b))); // x = 1 and y = 4
+
+
+/*
+ *  Destructuring
+ */
+
+// Def: Take a Structure e.g. an Array/Object and split it up into 
+// it's individual parts.
+
+// Incase we want to consume an Array. We can consume indivual values from the 
+// Array without using Indexors.
+
+// Used better with API results to navigate the tree.
+
+// @Example
+function destructure() {
+    return [1, 2];
+}
+
+// Now Distructure the Array.
+
+var _destructure = destructure(),
+    _destructure2 = _slicedToArray(_destructure, 3),
+    a = _destructure2[0],
+    b = _destructure2[1],
+    c = _destructure2[2];
+
+// Set Default Values for the Array Values.
+// if they are absent in the returned structure.
+
+// Be safe by speacializing a fallback e.g. Empty Array.
+
+
+var _ref = destructure() || [],
+    _ref2 = _slicedToArray(_ref, 3),
+    e = _ref2[0],
+    _ref2$ = _ref2[1],
+    f = _ref2$ === undefined ? 43 : _ref2$,
+    g = _ref2[2];
+
+// Gather the Rest of the values into an Array.
+
+
+var _ref3 = destructure() || [],
+    _ref4 = _toArray(_ref3),
+    d = _ref4[0],
+    args = _ref4.slice(1);
+
+/*
+ * Dumping Variables
+ * Dump === Discard or Slice some parts of an Array.
+ */
+
+var a = [1, 2, 3];
+
+// Gather on the Left and Spread on the Right.
+
+var _ref5 = [0].concat(_toConsumableArray(a), [4]),
+    x = _ref5[0],
+    y = _ref5[1],
+    a = _ref5.slice(2);
+
+// Now a == [2, 3, 4]
+
+
+/*
+ * Destructuring a Nested Array
+ */
+
+
+function nestedArray() {
+    return [13, [4, 5, 6]];
+}
+
+// This becomes;
+
+var _ref6 = nestedArray() || [],
+    _ref7 = _slicedToArray(_ref6, 2),
+    v = _ref7[0],
+    _ref7$ = _slicedToArray(_ref7[1], 3),
+    h = _ref7$[0],
+    n = _ref7$[2];
+
+/*
+ * Object Destructuring
+ */
