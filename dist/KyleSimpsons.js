@@ -416,3 +416,42 @@ var myObjectConcised = (_myObjectConcised = {
         }
     }, _callee, this);
 })), _myObjectConcised);
+
+/*
+ * Ranges Between Numbers Trick
+ */
+
+Number.prototype[Symbol.iterator] = /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    var i;
+    return regeneratorRuntime.wrap(function _callee2$(_context3) {
+        while (1) {
+            switch (_context3.prev = _context3.next) {
+                case 0:
+                    i = 0;
+
+                case 1:
+                    if (!(i <= this)) {
+                        _context3.next = 7;
+                        break;
+                    }
+
+                    _context3.next = 4;
+                    return i;
+
+                case 4:
+                    i++;
+                    _context3.next = 1;
+                    break;
+
+                case 7:
+                case "end":
+                    return _context3.stop();
+            }
+        }
+    }, _callee2, this);
+});
+
+// Try it out;
+var myRange = [].concat(_toConsumableArray(5));
+
+console.log(myRange); // [0, 1, 2, 3, 4, 5]

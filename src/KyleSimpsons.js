@@ -327,3 +327,19 @@ desParams({
      *foo(){  },
      *[c+"gn"](){  }
  };
+ 
+ 
+ /*
+  * Ranges Between Numbers Trick
+  */
+ 
+ Number.prototype[Symbol.iterator] = function* (){
+    for (var i = 0; i <= this; i++) {
+        yield i;
+    }
+ };
+ 
+ // Try it out;
+ var myRange = [...5];
+ 
+ console.log(myRange); // [0, 1, 2, 3, 4, 5]
