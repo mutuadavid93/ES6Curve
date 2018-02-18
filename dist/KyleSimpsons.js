@@ -273,3 +273,122 @@ var _ref6 = nestedArray() || [],
 /*
  * Object Destructuring
  */
+
+function desObjects() {
+    return { w: 1, y: 21 };
+}
+
+// Now Destructure the Object;
+
+// @Syntax, propname:varname
+
+var _ref8 = desObjects() || {},
+    w = _ref8.w,
+    varname = _ref8.y;
+
+// Defaults
+
+
+var _ref9 = desObjects() || {},
+    w = _ref9.w,
+    _ref9$y = _ref9.y,
+    varname = _ref9$y === undefined ? 33 : _ref9$y;
+
+// Nested Destructuring of an Array inside an Object
+
+
+var _ref10 = desObjects() || {},
+    a = _ref10.a,
+    _ref10$b = _ref10.b,
+    B = _ref10$b === undefined ? 46 : _ref10$b,
+    _ref10$d = _ref10.d;
+
+_ref10$d = _ref10$d === undefined ? [] : _ref10$d;
+
+var _ref10$d2 = _slicedToArray(_ref10$d, 1),
+    e = _ref10$d2[0];
+
+/*
+ * Destructuring Function Parameters
+ */
+
+function desFuncParams() {
+    var _ref11 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [],
+        _ref12 = _slicedToArray(_ref11, 3),
+        a = _ref12[0],
+        b = _ref12[1],
+        c = _ref12[2];
+
+    console.log(a, b, c);
+}
+
+// Tricky: You have to pass an Array for it to work.
+desFuncParams([1, 2, 3]);
+
+// @Example 2:
+function desParams() {
+    var _ref13 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref13$a = _ref13.a,
+        a = _ref13$a === undefined ? 10 : _ref13$a,
+        b = _ref13.b,
+        d = _ref13.d;
+
+    console.log(a, b, d);
+}
+
+// Like named paremeters;
+// Useful when you have many Params and you don't remember their order.
+desParams({
+    d: 5,
+    b: 7
+}); // invokation
+
+
+/*
+ * Advanced Destructuring
+ */
+
+// @Scenario: I have an Object to hold my defaults. e.g. an AJax Call.
+// a config to hold both properties i have set and those i havn't
+
+// Declare the Config Object.
+var config = {
+    url: "http://some.api.url/resource",
+    callback: foo,
+    headers: {
+        "x-requested-with": "foo"
+    }
+};
+
+// @Example:
+{
+    // let {} = config || {};
+
+    // Destructure the Config Object.
+    // Setting Defaults where it lacks them.
+    var _ref14 = config || {},
+        _ref14$method = _ref14.method,
+        method = _ref14$method === undefined ? "POST" : _ref14$method,
+        url = _ref14.url,
+        _ref14$callback = _ref14.callback,
+        callback = _ref14$callback === undefined ? function () {} : _ref14$callback,
+        _ref14$headers = _ref14.headers,
+        _ref14$headers$conten = _ref14$headers["content-type"],
+        contentType = _ref14$headers$conten === undefined ? "text/plain" : _ref14$headers$conten,
+        xRequestedWith = _ref14$headers["x-requested-with"];
+
+    // Restructure the Config Object Back.
+
+
+    config = {
+        method: method,
+        url: url,
+        callback: callback,
+        headers: {
+            "content-type": contentType,
+            "x-requested-with": xRequestedWith
+        }
+    };
+
+    // console.log(config.method);
+}
