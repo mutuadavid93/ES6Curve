@@ -27,6 +27,17 @@ obj.foo(); // 42
  * Default Values
  */
 
+// NB: Passing an Empty String won't Trigger the Default value usage.
+// @Example:
+function people(name = "David Mutua") {
+    // console.warn(`Hello ${name} !`);
+}
+
+people("Kimeu"); // Hello Kimeu !
+people(); // Hello David Mutua !
+people(""); // Hello  !
+people(undefined); // Hello David Mutua !
+
 // Traditionally, Right way;
 function foo(x) {
     x = x !== undefined ? x : 52;
@@ -77,6 +88,7 @@ rook(1); // Execution Not Needed.
 // @Example;
 var doosh = function (...args) {
     args.unshift(62);
+    args.push(80);
     
     // Spread the Array into individual parts.
     // Then Maybe pass it to a function.
@@ -84,9 +96,7 @@ var doosh = function (...args) {
 }(58, 78);
 
 function bar(...moargs) {
-    for(let a of moargs){
-        // console.log(a); // Now use the Array items.
-    }
+    console.log(moargs); // [62, 58, 78, 80]
 }
 
 
@@ -110,9 +120,7 @@ dice(0, ...r, ...z, 10);
 // dice(...rz); // Alternative.
 
 function dice(...params) {
-    for(let y of params){
-        console.log(y);
-    }
+    console.log(params); // [0, 1, 2, 8, 9, 10]
 }
 
 
@@ -284,3 +292,38 @@ desParams({
     // console.log(config.method);
  }
  
+ 
+ /*
+  * Concise Variables, Properties, Concise Functions
+  */
+ 
+ // Concise Variables, if the varName & propName are the same, use 
+ // the elem as the varible name too. e.g. a below.
+ 
+ 
+ // Concise Functions, Exclude the function keyword and write it 
+ // this way:  b(){ } instead of b: function(){}
+ // NB: They lack lexical scope i.e. can call itself.
+ 
+ // Computed Property Names
+ // e.g. var c = "hello" where you want "hello" to be a property.
+ //
+ // So instead of adding a property to an Object this way: obj[varname] = 42 
+ // you instead do this inside the object body: [c]: 42
+ //
+ // Creating a function fn from a computed property name;
+ // [c+"fn"](){  } so becomes: function hellofn(){}
+ 
+ 
+ // Computed Generator: *foo(){  }
+ // Concise Computed Generator: *[c+"gn"](){  }
+ var a = 1, c = "hello";
+ 
+ var myObjectConcised = {
+     a,
+     b(){ },
+     [c]: 42,
+     [c+"fn"](){  },
+     *foo(){  },
+     *[c+"gn"](){  }
+ };

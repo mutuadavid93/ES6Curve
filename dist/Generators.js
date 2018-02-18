@@ -215,7 +215,17 @@ var obj = (_obj = {}, _defineProperty(_obj, Symbol.iterator, /*#__PURE__*/regene
             }
         }
     }, _callee, this);
-})), _defineProperty(_obj, "start", 1), _defineProperty(_obj, "end", 5), _defineProperty(_obj, "values", [2, 4, 6, 10, 5, 7, 9]), _obj);
+})), _defineProperty(_obj, "start", 1), _defineProperty(_obj, "end", 6), _defineProperty(_obj, "values", [2, 4, 6, 10, 5, 7, 9]), _obj);
 
 var vals = [].concat(_toConsumableArray(obj));
+
 console.log(vals);
+
+// NOTES:
+//
+// 1. Making an Object Iterable, You need an Array to loop it's values,
+// 2. So that you can yield each of them.
+//
+// NB: It doesn't matter what for loop you use.
+//
+// Now the Above makes that Object an Iterable.

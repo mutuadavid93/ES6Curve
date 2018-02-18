@@ -100,9 +100,21 @@ var obj = {
         }
     },
     start: 1,
-    end: 5,
+    end: 6,
     values: [2, 4, 6, 10, 5, 7, 9]
 };
 
 var vals = [ ...obj ];
+
 console.log(vals);
+
+
+
+// NOTES:
+//
+// 1. Making an Object Iterable, You need an Array to loop it's values,
+// 2. So that you can yield each of them.
+//
+// NB: It doesn't matter what for loop you use.
+//
+// Now the Above makes that Object an Iterable.

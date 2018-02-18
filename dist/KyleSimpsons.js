@@ -1,6 +1,10 @@
 "use strict";
 
+var _myObjectConcised;
+
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
@@ -29,6 +33,19 @@ obj.foo(); // 42
 /*
  * Default Values
  */
+
+// NB: Passing an Empty String won't Trigger the Default value usage.
+// @Example:
+function people() {
+    // console.warn(`Hello ${name} !`);
+
+    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "David Mutua";
+}
+
+people("Kimeu"); // Hello Kimeu !
+people(); // Hello David Mutua !
+people(""); // Hello  !
+people(undefined); // Hello David Mutua !
 
 // Traditionally, Right way;
 function foo(x) {
@@ -85,6 +102,7 @@ var doosh = function () {
     }
 
     args.unshift(62);
+    args.push(80);
 
     // Spread the Array into individual parts.
     // Then Maybe pass it to a function.
@@ -96,30 +114,7 @@ function bar() {
         moargs[_key2] = arguments[_key2];
     }
 
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = moargs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            // console.log(a); // Now use the Array items.
-
-            var _a = _step.value;
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator["return"]) {
-                _iterator["return"]();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
+    console.log(moargs); // [62, 58, 78, 80]
 }
 
 /*
@@ -147,30 +142,7 @@ function dice() {
         params[_key3] = arguments[_key3];
     }
 
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-        for (var _iterator2 = params[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var _y = _step2.value;
-
-            console.log(_y);
-        }
-    } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"]) {
-                _iterator2["return"]();
-            }
-        } finally {
-            if (_didIteratorError2) {
-                throw _iteratorError2;
-            }
-        }
-    }
+    console.log(params); // [0, 1, 2, 8, 9, 10]
 }
 
 // @Example;
@@ -392,3 +364,55 @@ var config = {
 
     // console.log(config.method);
 }
+
+/*
+ * Concise Variables, Properties, Concise Functions
+ */
+
+// Concise Variables, if the varName & propName are the same, use 
+// the elem as the varible name too. e.g. a below.
+
+
+// Concise Functions, Exclude the function keyword and write it 
+// this way:  b(){ } instead of b: function(){}
+// NB: They lack lexical scope i.e. can call itself.
+
+// Computed Property Names
+// e.g. var c = "hello" where you want "hello" to be a property.
+//
+// So instead of adding a property to an Object this way: obj[varname] = 42 
+// you instead do this inside the object body: [c]: 42
+//
+// Creating a function fn from a computed property name;
+// [c+"fn"](){  } so becomes: function hellofn(){}
+
+
+// Computed Generator: *foo(){  }
+// Concise Computed Generator: *[c+"gn"](){  }
+var a = 1,
+    c = "hello";
+
+var myObjectConcised = (_myObjectConcised = {
+    a: a,
+    b: function b() {}
+}, _defineProperty(_myObjectConcised, c, 42), _defineProperty(_myObjectConcised, c + "fn", function () {}), _defineProperty(_myObjectConcised, "foo", /*#__PURE__*/regeneratorRuntime.mark(function foo() {
+    return regeneratorRuntime.wrap(function foo$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                case "end":
+                    return _context.stop();
+            }
+        }
+    }, foo, this);
+})), _defineProperty(_myObjectConcised, c + "gn", /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return regeneratorRuntime.wrap(function _callee$(_context2) {
+        while (1) {
+            switch (_context2.prev = _context2.next) {
+                case 0:
+                case "end":
+                    return _context2.stop();
+            }
+        }
+    }, _callee, this);
+})), _myObjectConcised);
