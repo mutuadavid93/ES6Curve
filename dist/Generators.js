@@ -7,7 +7,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var _marked = /*#__PURE__*/regeneratorRuntime.mark(main),
-    _marked2 = /*#__PURE__*/regeneratorRuntime.mark(mygenerator);
+    _marked2 = /*#__PURE__*/regeneratorRuntime.mark(mygenerator),
+    _marked3 = /*#__PURE__*/regeneratorRuntime.mark(functionName);
 
 /*
  *  yield, pauses a generator execution cycle.
@@ -217,15 +218,36 @@ var obj = (_obj = {}, _defineProperty(_obj, Symbol.iterator, /*#__PURE__*/regene
     }, _callee, this);
 })), _defineProperty(_obj, "start", 1), _defineProperty(_obj, "end", 6), _defineProperty(_obj, "values", [2, 4, 6, 10, 5, 7, 9]), _obj);
 
-var vals = [].concat(_toConsumableArray(obj));
+var vals = [].concat(_toConsumableArray(obj)); // Finally it becomes an Array which is an Iterable!
 
 console.log(vals);
 
 // NOTES:
 //
-// 1. Making an Object Iterable, You need an Array to loop it's values,
+// 1. Making an Object Iterable, You need an Array and loop it's values,
 // 2. So that you can yield each of them.
 //
-// NB: It doesn't matter what for loop you use.
+// NB: It doesn't matter what for loop you use during yielding process.
 //
 // Now the Above makes that Object an Iterable.
+
+// Just a Thought:
+// *[Symbol.iterator]() { }
+//
+// Becomes a Generator from a Generator Syntax Below
+
+//@Syntax;
+function functionName() {
+    return regeneratorRuntime.wrap(function functionName$(_context4) {
+        while (1) {
+            switch (_context4.prev = _context4.next) {
+                case 0:
+                case "end":
+                    return _context4.stop();
+            }
+        }
+    }, _marked3, this);
+}
+
+// And since we don't use function keyword inside a class then we only use the 
+// *functionName()

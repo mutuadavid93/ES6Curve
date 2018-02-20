@@ -31,4 +31,47 @@ var safeInt = Number.isSafeInteger(9007199254740991);
 
 
 var radNum = +new Date(); // radom number.
-display(radNum);
+display(Number.isSafeInteger(radNum));
+
+
+/*
+ * Math
+ * @Math Method
+ */
+
+// Cube Root
+var cuberoot = Math.cbrt(27);
+var logarithm = Math.log10(100); // 2
+
+
+// Determine whether a value is Positive
+var positveNum = Math.sign(10); // 1
+
+// Determine whether a value is Negative
+var negativeNum = Math.sign(-10); // -1
+
+// Determine whether a value is a Zero
+var zeroValue = Math.sign(0); // 0
+
+// Truncate a Value
+var truncVal = Math.trunc(2.8); // 2
+var truncNegVal = Math.trunc(-2.8); // -2
+
+
+
+
+
+
+/*
+ * Arrays
+ * New Features added in ES6
+ */
+
+// find(), find an item in an Array the first item that meets your createria.
+var ary = [1,5,6,10];
+var match = ary.find(item => item > 8); // 10
+
+// findIndex(), find the index of the first Matching item in the Array
+var matchIndex = ary.findIndex(item => item > 3); // 1
+
+display(matchIndex); // 10

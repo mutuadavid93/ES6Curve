@@ -84,6 +84,9 @@ var iteratorsDemo = function() {
 // for of loop: Works Best with iterators.
 // Loops over a Collection's Values and NOT Keys or Indices.
 
+
+// NB: Behind the Scenes, fo of loop can call the next() method and check a flag 
+// for us to see if iteration is complete.
 var highEndIterators = function () {
     let numbers = [1, 8, 3, 4, 5], sum = 0;
     
