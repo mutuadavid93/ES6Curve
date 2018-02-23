@@ -1,5 +1,7 @@
 "use strict";
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 function display(func) {
   console.log(func);
 }
@@ -57,6 +59,8 @@ var truncVal = Math.trunc(2.8); // 2
 var truncNegVal = Math.trunc(-2.8); // -2
 
 
+var tod = new Date();
+
 /*
  * Arrays
  * New Features added in ES6
@@ -73,4 +77,189 @@ var matchIndex = ary.findIndex(function (item) {
   return item > 3;
 }); // 1
 
-display(matchIndex); // 10
+// Should Create a new array from an array-like Object when from is called. 
+var arrayLikeDomObject = document.querySelectorAll('div');
+var fromArray = Array.from(arrayLikeDomObject);
+
+// Should Return entries from the entries function.
+// Starting with the index then value sequentially.
+var a = ["Jowey", "Zoe", "James"];
+var entries = a.entries();
+
+var firstEntry = entries.next().value;
+firstEntry[0]; // 0
+firstEntry[1]; // Jowey
+
+
+/*
+ * Sets 
+ * The Set Object
+ */
+
+// Allows us to diplay a Unique set of Items.
+
+// By Default a Set Contains Zero Items when constructed.
+var set = new Set();
+set.size; // 0
+
+// Add Items using the add()
+set.add("SomeValue");
+
+// Should allow objects as Keys, which other structures don't
+var key = {};
+set.add(key);
+set.has(key); // true
+
+// Should contain items when given an array in the constructor.
+var myset = new Set([1, 2, 3]);
+myset.has(1); // true
+
+// Sets Don't allow duplicates, they ignore them if added and size() never 
+// increases.
+
+// Should have no items after clear is called.
+var anotherset = new Set();
+anotherset.add(20);
+anotherset.add(25);
+anotherset.clear();
+anotherset.size; // 0
+
+// NB: You can loop them using loops but it's advisable, instead use complex
+// data structures e.g. Arrays.
+
+// NB: A set can consume another set's values
+
+
+/*
+ * Maps
+ * Collection of Value : Key Pairs, Very Similar to Objects but designed for holding
+ * // collectons with Key Value Pairs.
+ */
+
+// Should Contain 1 item when one item is added.
+var map = new Map();
+map.set("age", 35);
+map.size; // 1
+
+// Access value from a Map;
+map.get("age"); // 35
+
+// Allow an Object to be the Key;
+var ageMap = new Map();
+var ralph = { 'name': 'Ralphael' };
+ageMap.set(ralph, 28);
+ageMap.get(ralph); // 28
+
+// Can Contain items when given an array in the constructor
+var arrMap = new Map([['name', 'John'], ['age', 15], ['weight', '155']]);
+
+arrMap.size; // 3
+
+// Find the correct item when has is called on the key.
+arrMap.has('age'); // true
+
+// If you add a duplcate item into a Map(), it replaces the existing item.
+// i.e. Never allow duplicate Keys.
+var mymap = new Map();
+var keyed = {};
+mymap.set(keyed, 'first');
+mymap.set(keyed, 'second');
+mymap.get(keyed); // 'second'
+
+// NB: Maps can be deleted
+mymap["delete"](keyed);
+mymap.has(keyed); //false
+
+// Call the callback function for each item when forEach is called
+var iteration = 0;
+arrMap.forEach(function (value, key) {
+  iteration++;
+  // use value and key here.
+});
+iteration; // 3
+
+// Supports for of iteration
+var iterate = 0;
+var _iteratorNormalCompletion = true;
+var _didIteratorError = false;
+var _iteratorError = undefined;
+
+try {
+  for (var _iterator = arrMap[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    var _ref = _step.value;
+
+    var _ref2 = _slicedToArray(_ref, 2);
+
+    var key = _ref2[0];
+    var value = _ref2[1];
+
+    // Consume key and value variables.
+    iterate++;
+  }
+
+  // Can be constructed with an iterator
+} catch (err) {
+  _didIteratorError = true;
+  _iteratorError = err;
+} finally {
+  try {
+    if (!_iteratorNormalCompletion && _iterator["return"]) {
+      _iterator["return"]();
+    }
+  } finally {
+    if (_didIteratorError) {
+      throw _iteratorError;
+    }
+  }
+}
+
+var map13 = new Map();
+map13.set('1');
+map13.set('2');
+
+//NB: The first element becomes the key i.e. 1
+// and the Second elem becomes the value i.e. 2
+var map14 = new Map(map13.entries());
+map14.size; // 2
+
+
+/*
+ * WeakMap and WeakSet
+ * Defn: They are variations of Map() and Set()
+ */
+
+// Purpose for each of them;
+// To Solve the Problem with garbage collector unable to reuse and discard 
+// resources pointed to by a Set(), e.g. Set Pointing a DOM element.
+
+/* @WeekSets */
+// They lack:
+// 1. size property.
+// 2. entries method.
+// 3. values method.
+// 4. forEach can be used against them.
+
+// They otherwise support:
+// 1. find an item with has()
+var myWeakSet = new WeakSet();
+var item = { name: 'joe' };
+myWeakSet.add(item);
+myWeakSet.has(item); // true.
+
+// 2. Can remove item with delete()
+myWeakSet["delete"](item);
+myWeakSet.has(item); // false.
+
+// 3. clear items using clear()
+myWeakSet.clear();
+// Confirm the item you were targeting is cleared by checking if the WeakSet has 
+// it i.e. myWeakSet.has(item);
+
+
+/* @WeakMaps */
+// Support Only:
+// 1. get(key)
+// 2. delete(key)
+// 3. clear()
+
+display(map14.size); // 10
