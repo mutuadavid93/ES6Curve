@@ -71,3 +71,132 @@ function getCompanyFromOrderId(orderId) {
         // Handler Error
     });
 }
+
+/*
+ * Promises Basics
+ */
+
+// NOTE: done() in all this promises called explicitly should commented out,
+// otherwise it will throw an Error: done() is not defined in Promise.
+
+var myPromiseFunction = function myPromiseFunction() {
+    // Declare the Promise
+    var promise = new Promise(function (resolve, reject) {
+        resolve();
+    });
+
+    // Listen to the Promise, and Execute some code when it Finishes.
+    // By passing promise.then(callback), creates a promise listener.
+
+    // This Below here is a Promise's Listener.
+    promise.then(function () {
+        done();
+    });
+};
+
+// Now look at return data.
+// i.e. Promises need a way to pass data back to the Listeners and let them know 
+// that the async funtionality is completed by the given data.
+
+// @Example:
+var returnDataFromPromise = function returnDataFromPromise() {
+    var promise = new Promise(function (resolve, reject) {
+        resolve(1);
+    });
+
+    // Now recieve that data as a param into my listener.
+    promise.then(function (data) {
+        console.log(data); // 1
+        done();
+    });
+};
+
+// What if a promise fails? Reject is used to fail a Promise.
+var failOnRejection = function failOnRejection() {
+    var promise = new Promise(function (resolve, reject) {
+        reject(Error("Error description"));
+    });
+
+    // Deal with Success and Failure
+    promise.then(function () {
+        // Success
+    }, function (error) {
+        console.warn(error.message);
+        done();
+    });
+};
+
+// We can use a catch if it's a definate fail
+var failUsingCatch = function failUsingCatch() {
+    var promise = new Promise(function (resolve, reject) {
+        reject(Error("Error description"));
+    });
+
+    // Deal with Failure Explicitly.
+    promise["catch"](function (error) {
+        console.warn(error.message);
+        done();
+    });
+};
+
+// Should compose when resolved with a promise.
+// i.e. Resolve a promise by giving it another promise:
+var resolveUsingAnotherPromise = function resolveUsingAnotherPromise() {
+    var prevPromise = new Promise(function (resolve, reject) {
+        resolve(3); // resolve with a static value.
+    });
+
+    // nextPromise Promise resolves based on status of prevPromise Promise.
+    var nextPromise = new Promise(function (resolve, reject) {
+        resolve(prevPromise); // resolve with another promise's resolve value i.e. 3
+    });
+
+    nextPromise.then(function (data) {
+        console.log(data); // 3
+        // done();
+    });
+};
+
+// Dealing a Promise that Automatically Resolves or Automatically Rejects.
+// Named: Static Resolve and Reject respectively.
+
+// A Promise that Automatically Resolves with a Value 3.
+var resolvesPromiseAutomatically = function resolvesPromiseAutomatically() {
+    var previousPromise = Promise.resolve(3);
+
+    var promise = Promise.resolve(previousPromise);
+
+    promise.then(function (data) {
+        console.log(data); // 3
+        done();
+    });
+};
+
+var rejectsPromiseAutomatically = function rejectsPromiseAutomatically() {
+    var promise = Promise.reject(Error("Oh noo!"));
+
+    promise["catch"](function (error) {
+        console.warn(error.message);
+        done();
+    });
+};
+
+var shouldBeAsynchronous = function () {
+
+    var async = false;
+    var promise = new Promise(function (resolve, reject) {
+        resolve(); // imediately resolve the promise.
+    });
+
+    // Inside the Listener, the async value is true.
+    promise.then(function () {
+        console.log(async); // true
+        // done();
+    });
+
+    // after everything make async true.
+
+    // 1. async is set from false to true.
+    // 2. the callback is invoked and at that time async is true.
+    async = true;
+}();
