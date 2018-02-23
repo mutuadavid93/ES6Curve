@@ -228,7 +228,7 @@ myWeakSet.delete(item);
 myWeakSet.has(item); // false.
 
 // 3. clear items using clear()
-myWeakSet.clear();
+// myWeakSet.clear();
 // Confirm the item you were targeting is cleared by checking if the WeakSet has 
 // it i.e. myWeakSet.has(item);
 
