@@ -236,3 +236,51 @@ aSetProxyUnicorn.horn = false;
 
 
 // NB: You can Intercept multiple properties in one Proxy Object.
+
+
+/*
+ * Proxying Functions
+ */
+
+
+// Intercept function calls using proxies;
+
+// @Example:
+var gemUnicorn = {
+    legs: 4,
+    color: 'red',
+    horn: true,
+    hornAttack: function (target) {
+        return target.name + ' was destroyed';
+    }
+};
+
+
+
+// Hide the hornAttack function away from direct invokations using a Proxy.
+//
+// @Syntax; apply: function (targetFunction, contextThis, argsToTheFunc)
+// i.e. context means the caller of the function.
+gemUnicorn.hornAttack = new Proxy(gemUnicorn, {
+    apply: function (target, context, args) {
+        if(context !== gemUnicorn){
+           console.warn("Nobody can use the gemUnicorn horn");
+        }else {
+            return target.apply(context, args);
+        }
+    }
+});
+
+
+
+// Now a thief Object tries to use/attack gemUnicorn horn using hornAttack function.
+var thief = { name: 'Jaydakiss Thief' };
+
+// Tries to make it it's own Property so it can use it;
+thief.attack = gemUnicorn.hornAttack;
+
+// Now intends to use it to steal the horn from gemUnicorn.
+//
+// NOTE: Now context is equal "thief" and not "gemUnicorn".
+// gemUnicorn.hornAttack() Proxy denies this.
+thief.attack(); // Fails and I don't know why!
