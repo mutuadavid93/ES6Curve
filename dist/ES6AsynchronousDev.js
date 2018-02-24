@@ -200,3 +200,10 @@ var shouldBeAsynchronous = function () {
     // 2. the callback is invoked and at that time async is true.
     async = true;
 }();
+
+/*
+ * Advanced Promises
+ */
+
+// Reference The Very First Basic Operation.
+var chainSequentially = function chainSequentially() {};
