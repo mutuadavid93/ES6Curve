@@ -143,4 +143,96 @@ var res = tri.member_Fredrick.name; // 'Fredrick'
 var beard = tri.member_Joe.beardColor; // 'Brown Beard'
 
 
-console.log(beard);
+
+
+
+
+
+/*
+ * PROXIES
+ */
+
+// Used in Validations and Strict Property Typing.
+
+// Allow us to intercept Operations done on Objects.
+
+// Under the Hood: When we use Proxy Object we don't modify the original Object 
+// itself instead we are creating a New Object that creates a Wrapper around 
+// the original Object.
+
+// Intercept GET:
+var unicorn = {
+    legs: 4,
+    color: 'brown',
+    horn: true
+};
+
+// Now Create our Proxy Object
+//
+// @Syntax: new Proxy(targetObject, {Operations})
+// ProxyKey @Syntax; key : function (targetObject, ObjectProperty)
+var proxyUnicorn = new Proxy(unicorn, {
+    get : function (target, property) {
+        if(property === 'color'){
+            return 'awesome '+ target[property];
+        }else{
+            return target[property];
+        }
+    }
+}); 
+
+// var color = proxyUnicorn.color; // 'awesome brown'
+// var legs = proxyUnicorn.legs; // 4
+
+
+// NOTE: When Intercepting Sets using Proxy, it throws an Error in "use strict" 
+// mode, due to polyfills. Babel on it's own can transpile it without an error.
+//
+// Solution: Inside the set function return true and you good.
+// 
+// i.e. 
+// var yourSetProxy = new Proxy(targetObject, {
+//      set : function (target, property, value) {
+// 
+//           // Your logic here.
+// 
+//           return true;
+//      }
+// });
+
+
+// Intercept SET
+var tycorn = {
+    legs: 4,
+    color: 'brown',
+    horn: true
+};
+
+// @Syntax; set : function(targetObj, propName, valueToBeSetTo)
+var aSetProxyUnicorn = new Proxy(tycorn, {
+    set : function (target, property, value) {
+        if(property === 'horn' && value === false) {
+            console.warn("A unicorn cannot ever lose it's horn!");
+        }else {
+            target[property] = value;
+        }
+        
+        return true;
+    }
+});
+
+aSetProxyUnicorn.horn = false;
+// console.log(aSetProxyUnicorn.horn); // true
+
+
+
+// In Addition you can Intercept other Object Properties:
+//
+// 1. delete
+// 2. define
+// 3. freeze or seal
+// 4. when in operator is used
+// 5. has
+
+
+// NB: You can Intercept multiple properties in one Proxy Object.
