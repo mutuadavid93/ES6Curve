@@ -3,14 +3,16 @@ const BABEL = require('gulp-babel');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const uglify = require('gulp-uglify'),
+    connect = require('gulp-connect'),
     babelify = require('babelify'),
     browserify = require("browserify");
 
 GULP.task('transpile', () => {
     let jsSrc = 'src/*.js';
     return GULP.src(jsSrc)
-            .pipe(BABEL())
-            .pipe(GULP.dest('dist'));
+        .pipe(BABEL())
+        .pipe(GULP.dest('dist'))
+        .pipe(connect.reload());
 });
 
 GULP.task('modulify', () => {
@@ -23,7 +25,15 @@ GULP.task('modulify', () => {
     .pipe(source('main_module.min.js'))
     .pipe(buffer())
     .pipe(uglify())
-    .pipe(GULP.dest('./dist'));
+    .pipe(GULP.dest('./dist'))
+    .pipe(connect.reload());
+});
+
+GULP.task('connect', () => {
+    connect.server({
+        root: '.',
+        livereload: true
+    });
 });
 
 GULP.task('watch',  () => {
@@ -32,4 +42,4 @@ GULP.task('watch',  () => {
     GULP.watch('src/*_module.js', ['modulify']);
 });
 
-GULP.task('default', ['transpile', 'modulify', 'watch']);
+GULP.task('default', ['transpile', 'modulify', 'connect', 'watch']);
