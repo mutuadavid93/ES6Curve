@@ -11,8 +11,8 @@ GULP.task('transpile', () => {
     let jsSrc = 'src/*.js';
     return GULP.src(jsSrc)
         .pipe(BABEL())
-        .pipe(GULP.dest('dist'))
-        .pipe(connect.reload());
+        .pipe(GULP.dest('dist'));
+        //.pipe(connect.reload());
 });
 
 GULP.task('modulify', () => {
@@ -25,14 +25,14 @@ GULP.task('modulify', () => {
     .pipe(source('main_module.min.js'))
     .pipe(buffer())
     .pipe(uglify())
-    .pipe(GULP.dest('./dist'))
-    .pipe(connect.reload());
+    .pipe(GULP.dest('./dist'));
+//    .pipe(connect.reload());
 });
 
 GULP.task('connect', () => {
     connect.server({
         root: '.',
-        livereload: true
+        livereload: false
     });
 });
 
@@ -42,4 +42,4 @@ GULP.task('watch',  () => {
     GULP.watch('src/*_module.js', ['modulify']);
 });
 
-GULP.task('default', ['transpile', 'modulify', 'connect', 'watch']);
+GULP.task('default', ['transpile', 'modulify','watch']);
