@@ -17,13 +17,21 @@ var s = Symbol();
 // Allows you to use a Symbol() as a Property Name of an Object.
 // Avoids Object Properties Name Conflicts.
 
-var myObj = {};
+var myObj = {propName: "propValue"};
 
 // Add a prop or a function in that object using a symbol
 myObj[s] = "Scott";
 
+// Add a Property Name Function using Symbol() 
+myObj[s] = function () {
+    return ("Assigned function using Symbol()");
+};
+
 // Retrieve the Property
-display(myObj[s]);
+display(myObj[s]());
+
+// Retrieve another Property
+display(myObj.propName);
 
 
 // Demonstrating Symbol.iterator
